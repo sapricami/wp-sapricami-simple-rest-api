@@ -1,11 +1,18 @@
 # Sapricami Simple REST_API
 
-[![Build Under Construction](https://img.shields.io/badge/Build%20-brightgreen.svg?style=flat)](https://github.com/sapricami/wp-sapricami-simple-rest-api)
+[![Build Under Construction](https://img.shields.io/badge/Build-Under%20Construction-red.svg)](https://github.com/sapricami/wp-sapricami-simple-rest-api)
 
 A Simple Rest Api plugin for wordpress build to take mobile app developer's woes away.
 
-Version: 0.0.1
+## Requirements 
 
+Wordpress 4+
+
+## Usage
+
+Download the project as zip and uncompress in `wp-content\plugins` folder of your wordpress installation. Activate plugin from wp-admin
+
+## Docs
 
 ## Developed By
 [Ankur Singh](https://ankursinghagra.github.io/)
