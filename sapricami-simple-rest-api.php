@@ -7,7 +7,7 @@ defined('ABSPATH') or die('No script kiddies please!');
 /*
 Plugin Name: Sapricami Simple REST_API
 Plugin URI: https://www.sapricami.com/
-Description: A Simple Rest Api plugin build to take mobile app developer's woes away.
+Description:  A Simple Rest Api plugin for wordpress build to take mobile app developer's woes away.
 Version: 0.0.1
 Author: Sapricami
 Author URI: https://www.sapricami.com/

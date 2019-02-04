@@ -1,7 +1,9 @@
 <?php 
 
-function sap_get_posts()
+function sap_get_posts(WP_REST_Request $request)
 {
+  	$parameters = $request->get_params();
+
 	$response = array();
 	$response['per_page'] = 10;
 	$response['page_no'] = 1;
