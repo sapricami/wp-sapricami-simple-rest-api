@@ -33,7 +33,6 @@ error_reporting(E_ALL & ~E_NOTICE);
 
 require_once SAPRICAMI_WP_REST_BASE . 'class.sapricami_simple_rest.php';
 require_once SAPRICAMI_WP_REST_BASE . 'basic_wp_functions/rest_functions.php';
-require_once SAPRICAMI_WP_REST_BASE . 'basic_wp_functions/rest_function_paths.php';
 
 register_activation_hook( __FILE__, array( 'Sapricami_simple_rest', 'plugin_activation' ) );
 register_deactivation_hook( __FILE__, array( 'Sapricami_simple_rest', 'plugin_deactivation' ) );
