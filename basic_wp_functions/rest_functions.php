@@ -13,6 +13,12 @@ add_action( 'rest_api_init', function () {
   ) );
 } );
 add_action( 'rest_api_init', function () {
+  register_rest_route( 'sap/v1', '/categories/parents_n_child', array(
+    'methods' => 'GET',
+    'callback' => 'sap_get_categories_parents_n_child',
+  ) );
+} );
+add_action( 'rest_api_init', function () {
   register_rest_route( 'sap/v1', '/author/(?P<id>\d+)', array(
     'methods' => 'GET',
     'callback' => 'sap_get_author_data',
@@ -42,8 +48,12 @@ function sap_get_posts(WP_REST_Request $request)
 	{
 		$posts = $query->posts;
 		foreach($posts as $post) {
+
+			$image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID),"full");
+
 		    $response['results'][]= array(
 				'post' => $post,
+				'image' => $image
 			);
 		}
 		wp_reset_postdata();
@@ -61,7 +71,34 @@ function sap_get_categories(WP_REST_Request $request)
 	    'orderby' => 'name',
 	    'order'   => 'ASC'
 	) );
-	$response['categories'] = $categories;
+	$response['results'] = $categories;
+	return rest_ensure_response($response);
+}
+
+function sap_get_categories_parents_n_child(WP_REST_Request $request)
+{
+	$parameters = $request->get_params();
+
+	$response = array();
+		$categories = get_categories( array(
+	    'orderby' => 'name',
+	    'order'   => 'ASC'
+	) );
+	$categories = json_decode(json_encode($categories), true);
+	$new_categories_array = array();
+	foreach ($categories as $key => $category) {
+		if($category['parent']==0){
+			$new_categories_array[$category['cat_ID']] = $category;
+		}
+	}
+	foreach ($categories as $key => $category) {
+		if($category['parent']!=0){
+			$new_categories_array[$category['parent']]['childern'][] = $category;
+		}
+	}
+
+	$response['results'] = $new_categories_array;
+
 	return rest_ensure_response($response);
 }
 function sap_get_author_data(WP_REST_Request $request)

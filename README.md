@@ -13,6 +13,7 @@ Wordpress 4+
 Download the project as zip and uncompress in `wp-content\plugins` folder of your wordpress installation. Activate plugin from wp-admin
 
 ## Docs
+[Postman Docs](https://documenter.getpostman.com/view/2685399/S11BxMCm)
 
 ## Developed By
 [Ankur Singh](https://ankursinghagra.github.io/)
