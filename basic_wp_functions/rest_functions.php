@@ -1,23 +1,30 @@
 <?php 
 
+/* POSTS */
 add_action( 'rest_api_init', function () {
   register_rest_route( 'sap/v1', '/posts', array(
     'methods' => 'GET',
     'callback' => 'sap_get_posts',
   ) );
 } );
+
+/* POST CATEGORIES */
 add_action( 'rest_api_init', function () {
   register_rest_route( 'sap/v1', '/categories', array(
     'methods' => 'GET',
     'callback' => 'sap_get_categories',
   ) );
 } );
+
+/* CATEGORIES AND SUBCATORIES IN TREE LAYOUT*/
 add_action( 'rest_api_init', function () {
-  register_rest_route( 'sap/v1', '/categories/parents_n_child', array(
+  register_rest_route( 'sap/v1', '/categories/hierarchical', array(
     'methods' => 'GET',
-    'callback' => 'sap_get_categories_parents_n_child',
+    'callback' => 'sap_get_categories_hierarchical',
   ) );
 } );
+
+/* AUTHOR INFO */
 add_action( 'rest_api_init', function () {
   register_rest_route( 'sap/v1', '/author/(?P<id>\d+)', array(
     'methods' => 'GET',
@@ -34,13 +41,15 @@ function sap_get_posts(WP_REST_Request $request)
 	$response['results'] = array();
 	$response['per_page'] = ($parameters['per_page'])?$parameters['per_page']:10;
 	$response['page_no'] = ($parameters['page_no'])?$parameters['page_no']:1;
+	$response['orderby'] = ($parameters['orderby'])?$parameters['orderby']:'date';
+	$response['order'] = ($parameters['order'])?$parameters['order']:'DESC';
 
 	$args = array(
 		'post_type' => 'post',
 		'posts_per_page' => $response['per_page'],
 		'paged' => $response['page_no'],
-		'orderby' => 'date',
-		'order' => 'DESC',
+		'orderby' => $response['orderby'],
+		'order' => $response['order'],
 	);
 	$query = new WP_Query( $args );
 
@@ -49,7 +58,7 @@ function sap_get_posts(WP_REST_Request $request)
 		$posts = $query->posts;
 		foreach($posts as $post) {
 
-			$image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID),"full");
+			$image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID),"thumbnail");
 
 		    $response['results'][]= array(
 				'post' => $post,
@@ -66,16 +75,20 @@ function sap_get_categories(WP_REST_Request $request)
 {
 	$parameters = $request->get_params();
 
-	$response = array();
-		$categories = get_categories( array(
-	    'orderby' => 'name',
-	    'order'   => 'ASC'
-	) );
+	$response = array();	
+	$response['results'] = array();	
+	$response['orderby'] = ($parameters['orderby'])?$parameters['orderby']:'name';
+	$response['order'] = ($parameters['order'])?$parameters['order']:'ASC';
+
+	$categories = get_categories( array(
+	    'orderby' => $response['orderby'],
+	    'order'   => $response['order']
+	));
 	$response['results'] = $categories;
 	return rest_ensure_response($response);
 }
 
-function sap_get_categories_parents_n_child(WP_REST_Request $request)
+function sap_get_categories_hierarchical(WP_REST_Request $request)
 {
 	$parameters = $request->get_params();
 
@@ -103,5 +116,12 @@ function sap_get_categories_parents_n_child(WP_REST_Request $request)
 }
 function sap_get_author_data(WP_REST_Request $request)
 {
+	$parameters = $request->get_params();
 
+	$response = array();	
+	$response['results'] = array();	
+	$response['user_id'] = ($parameters['user_id'])?$parameters['user_id']:0;
+	$response['results'] = get_userdata($parameters['user_id']);
+
+	return rest_ensure_response($response);
 }
