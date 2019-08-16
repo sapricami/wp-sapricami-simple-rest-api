@@ -2,15 +2,15 @@
 defined('ABSPATH') or die('No script kiddies please!');
 /**
  * @package Sapricami Simple REST_API
- * @version 0.0.1
+ * @version 0.0.2
  */
 /*
-Plugin Name: Sapricami Simple REST_API
-Plugin URI: https://www.sapricami.com/
+Plugin Name: Better REST_APIs for Mobile Apps 
+Plugin URI: https://www.sapricami.com/programming/wordpress/wordpress-plugin-better-rest-apis/
 Description:  A Simple Rest Api plugin for wordpress build to take mobile app developer's woes away.
-Version: 0.0.1
-Author: Sapricami
-Author URI: https://www.sapricami.com/
+Version: 0.0.2
+Author: ankursinghagra
+Author URI: https://ankursinghagra.github.com/
 License: GPLv2 or later
 Text Domain: sapricami-sample-rest-api
 */
@@ -29,7 +29,6 @@ if (version_compare(phpversion(), '5.6', '<')) {
   );
   return;
 }
-error_reporting(E_ALL & ~E_NOTICE);
 
 require_once SAPRICAMI_WP_REST_BASE . 'class.sapricami_simple_rest.php';
 require_once SAPRICAMI_WP_REST_BASE . 'basic_wp_functions/rest_functions.php';

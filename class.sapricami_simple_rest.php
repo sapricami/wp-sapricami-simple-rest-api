@@ -5,6 +5,7 @@ class Sapricami_simple_rest
 	
 	function __construct()
 	{
+		
 	}
 
 
@@ -31,7 +32,10 @@ class Sapricami_simple_rest
 	public static function sapricami_init_plugin()
 	{
 		//set rest api paths
+
 		return true;
 	}
 
 }
+
+
