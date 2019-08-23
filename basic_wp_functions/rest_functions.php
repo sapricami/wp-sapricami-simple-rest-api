@@ -60,6 +60,11 @@ function sap_get_posts(WP_REST_Request $request)
 		'orderby' => $response['orderby'],
 		'order' => $response['order'],
 	);
+
+	if(isset($parameters['cat_id'])){
+		$args['cat']=$parameters['cat_id'];
+	}
+
 	$query = new WP_Query( $args );
 
 	if ( $query->have_posts() ) 
@@ -67,7 +72,7 @@ function sap_get_posts(WP_REST_Request $request)
 		$posts = $query->posts;
 		foreach($posts as $post) {
 
-			$post->post_content = strip_tags($post->post_content);
+			$post->post_content = strip_shortcodes($post->post_content);
 
 			$image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID),$response['thumb']);
 
@@ -88,7 +93,8 @@ function sap_get_single_post(WP_REST_Request $request)
 	$response = array();	
 	$response['results'] = array();	
 	$response['post_id'] = (isset($parameters['id']))?$parameters['id']:0;
-	$response['thumb'] = ($parameters['thumb'])?$parameters['thumb']:'thumbnail';
+	$response['thumb'] = (isset($parameters['thumb']))?$parameters['thumb']:'thumbnail';
+	$response['format'] = (isset($parameters['format']))?$parameters['format']:'html';
 
 	$args = array(
 		'p' => $response['post_id'],
@@ -99,7 +105,12 @@ function sap_get_single_post(WP_REST_Request $request)
 		$posts = $query->posts;
 		foreach($posts as $post) {
 
-			$post->post_content = strip_tags($post->post_content);
+			remove_all_shortcodes();
+
+			$post->post_content = strip_shortcodes($post->post_content);
+			if($response['format']=="text"){
+				$post->post_content = strip_tags($post->post_content);
+			}
 
 			$image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID),$response['thumb']);
 

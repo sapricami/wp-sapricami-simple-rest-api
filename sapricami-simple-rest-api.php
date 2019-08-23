@@ -2,13 +2,13 @@
 defined('ABSPATH') or die('No script kiddies please!');
 /**
  * @package Sapricami Simple REST_API
- * @version 0.0.2
+ * @version 0.0.3
  */
 /*
 Plugin Name: Better REST_APIs for Mobile Apps 
 Plugin URI: https://www.sapricami.com/programming/wordpress/wordpress-plugin-better-rest-apis/
 Description:  A Simple Rest Api plugin for wordpress build to take mobile app developer's woes away.
-Version: 0.0.2
+Version: 0.0.3
 Author: ankursinghagra
 Author URI: https://ankursinghagra.github.com/
 License: GPLv2 or later

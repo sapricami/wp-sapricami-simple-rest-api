@@ -3,62 +3,19 @@
 [![Build Under Construction](https://img.shields.io/badge/Build-Under%20Construction-red.svg)](https://github.com/sapricami/wp-sapricami-simple-rest-api)
 
 A Simple Rest Api plugin for wordpress build to take mobile app developer's woes away.
+Better REST_APIs for Mobile Apps : It helps in development of mobile apps using general rest api. 
 
 ## Endpoints
-
-### Posts 
-
-`/wp-json/sap/v1/posts`
-
-| Get Paramaters | default value | options                                                                                   | required |
-|----------------|---------------|-------------------------------------------------------------------------------------------|----------|
-| per_page       | 10            | any integer                                                                               | no       |
-| page_no        | 1             | any integer                                                                               | no       |
-| orderby        | date          | [LINK](https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters) | no       |
-| order          | DESC          | [LINK](https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters) | no       |
-| thumb          | thumbnail     | [LINK](https://codex.wordpress.org/Post_Thumbnails#Thumbnail_Sizes)                       | no       |
-
-`/wp-json/sap/v1/post/:ID`
-
-where `ID` is the post id.
-
-| Get Paramaters | default value | options                                                             | required |
-|----------------|---------------|---------------------------------------------------------------------|----------|
-| thumb          | thumbnail     | [LINK](https://codex.wordpress.org/Post_Thumbnails#Thumbnail_Sizes) | no       |
-
-### Categories
-
-`/wp-json/sap/v1/categories`
-
-| Get Paramaters | default value | options | required |
-|----------------|---------------|---------|----------|
-| orderby        | name          | unknown | no       |
-| order          | ASC           | unknown | no       |
-
-`/wp-json/sap/v1/categories/hierarchical`
-
-| Get Paramaters | default value | options | required |
-|----------------|---------------|---------|----------|
-| orderby        | name          | unknown | no       |
-| order          | ASC           | unknown | no       |
-
-### Author Data
-
-`/wp-json/sap/v1/author/:ID`
-
-where `ID` is the id of the author.
-
+[Endpoints Explained here](https://github.com/sapricami/wp-sapricami-simple-rest-api/wiki/Endpoints)
 
 ## Requirements 
-
 Wordpress 4+
 
 ## Usage
-
-Download the project as zip and uncompress in `wp-content\plugins` folder of your wordpress installation. Activate plugin from wp-admin
+Download from [here](https://wordpress.org/plugins/better-rest-apis-for-mobile-apps-by-sapricami/) and install into your wordpress. 
 
 ## Docs
-[Postman Docs](https://documenter.getpostman.com/view/2685399/S11BxMCm)
+[Wiki](https://github.com/sapricami/wp-sapricami-simple-rest-api/wiki)
 
 ## Developed By
 [Ankur Singh](https://ankursinghagra.github.io/)
@@ -67,6 +24,9 @@ Download the project as zip and uncompress in `wp-content\plugins` folder of you
 [Wordpress Guide Used](https://developer.wordpress.org/rest-api/extending-the-rest-api/adding-custom-endpoints/)
 
 ## Version History
+
+### 0.0.3 Beta
+- added support for "html", "text" support for post_content
 
 ### 0.0.2 Beta
 - added support for thumbnail sizes
